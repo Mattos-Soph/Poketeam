@@ -23,13 +23,35 @@ def search_pokemon(pokemon):
             types.append(atype["type"]["name"])
         print(f"Your Pokémon type(s) is/are: {", ".join(types)}")
 
+        pokemon_data = {
+            "name": name,
+            "types": types,
+        }
+
+        return pokemon_data
+
     else:
         print("Yeah, we don't have it...")
+        return None
 
 print("PokéTeam Started!")
-pokemon = input("Choose a Pokémon: ")
-search_pokemon(pokemon)
+deck = []
 
+while len(deck) < 6:
+    pokemon = input("Choose a Pokémon: ")
+    chosen_pokemon = search_pokemon(pokemon)
+
+    if chosen_pokemon is not None:
+        confirm = input("Add this Pokémon to your deck? (y/n): ")
+        if confirm.lower() == "y":
+            deck.append(chosen_pokemon)
+            print(deck)
+        elif confirm.lower() == "n":
+            print("Pokémon not added to your deck.")
+        else: 
+            print("Invalid answer. Please type 'y' or 'n'.")
+
+    break
 
 
 
