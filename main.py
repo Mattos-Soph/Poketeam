@@ -64,4 +64,3 @@ while len(deck) < 6:
                 else: 
                     print("Invalid answer. Please type 'y' or 'n'.")
 
-    
