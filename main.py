@@ -37,21 +37,31 @@ def search_pokemon(pokemon):
 print("PokéTeam Started!")
 deck = []
 
+
 while len(deck) < 6:
     pokemon = input("Choose a Pokémon: ")
     chosen_pokemon = search_pokemon(pokemon)
 
+    confirm = ""
+
+    already_in_deck = False 
+
     if chosen_pokemon is not None:
-        confirm = input("Add this Pokémon to your deck? (y/n): ")
-        if confirm.lower() == "y":
-            deck.append(chosen_pokemon)
-            print(deck)
-        elif confirm.lower() == "n":
-            print("Pokémon not added to your deck.")
-        else: 
-            print("Invalid answer. Please type 'y' or 'n'.")
+        for pokemon_in_deck in deck:
+            if chosen_pokemon["name"] == pokemon_in_deck["name"]:
+               already_in_deck = True
+               print("This Pokémon is already in your deck. Please choose another one.")
+               break
 
-    break
+        if not already_in_deck:
+            while confirm not in ["y", "n"]:
+                confirm = input("Add this Pokémon to your deck? (y/n): ")
+                if confirm.lower() == "y":
+                    deck.append(chosen_pokemon)
+                    print(deck)
+                elif confirm.lower() == "n":
+                    print("Pokémon not added to your deck.")
+                else: 
+                    print("Invalid answer. Please type 'y' or 'n'.")
 
-
-
+    
