@@ -34,6 +34,15 @@ def search_pokemon(pokemon):
     else:
         print("Yeah, we don't have it...")
         return None
+    
+def show_deck(deck, title="Your Deck"):
+    print(f"\n=== {title} ===")
+
+    for position, pokemon in enumerate(deck, start=1):
+        print(
+            f"{position}. {pokemon['name'].capitalize()} — "
+            f"{', '.join(pokemon['types'])}"
+        )
 
 print("PokéTeam Started!")
 deck = []
@@ -57,18 +66,16 @@ while len(deck) < 6:
         if not already_in_deck:
             while confirm not in ["y", "n"]:
                 confirm = input("Add this Pokémon to your deck? (y/n): ").lower()
-                if confirm.lower() == "y":
+                if confirm == "y":
                     deck.append(chosen_pokemon)
                     print(deck)
-                elif confirm.lower() == "n":
+                elif confirm == "n":
                     print("Pokémon not added to your deck.")
                 else: 
                     print("Invalid answer. Please type 'y' or 'n'.")
 
-print("\n=== Your Deck ===")
+show_deck(deck)
 
-for position, pokemon in enumerate(deck, start=1):
-    print(f"{position}. {pokemon['name'].capitalize()} — {', '.join(pokemon['types'])}")
 
 deck_confirmed = False
 
@@ -124,13 +131,8 @@ while not deck_confirmed:
                     f"{pokemon_to_replace['name'].capitalize()} was replaced by "
                     f"{new_pokemon['name'].capitalize()}."
                 )
-                print("\n=== Updated Deck ===")
 
-                for position, pokemon in enumerate(deck, start=1):
-                    print(
-                        f"{position}. {pokemon['name'].capitalize()} — "
-                        f"{', '.join(pokemon['types'])}"
-                    )
+                show_deck(deck, "Updated Deck")
 
     else:
         print("Invalid option.")
