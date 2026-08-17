@@ -1,6 +1,7 @@
 import requests 
 
 def search_pokemon(pokemon): 
+    pokemon = pokemon.strip().lower()
     print(f"Searching {pokemon}...")
 
     url = f"https://pokeapi.co/api/v2/pokemon/{pokemon}"
@@ -81,11 +82,21 @@ while not deck_confirmed:
     elif choice == "2":
         print("Let's replace a Pokémon.")
 
-        replace_position = int(
-            input("Choose the number of the Pokémon you want to replace: ")
-        )
+        try:
+            replace_position = int(
+                input("Choose the number of the Pokémon you want to replace: ")
+            )
+
+        except ValueError:
+            print("Invalid option. Please type a number from 1 to 6.")
+            continue 
+
+        if replace_position < 1 or replace_position > 6:
+            print("Invalid option. Please choose a number from 1 to 6.")
+            continue
 
         index = replace_position - 1
+
         pokemon_to_replace = deck[index]
 
         print(
@@ -94,7 +105,6 @@ while not deck_confirmed:
         new_pokemon_name = input("Choose the new Pokémon: ")
 
         new_pokemon = search_pokemon(new_pokemon_name)
-        print("DEBUG new_pokemon:", new_pokemon)
 
         if new_pokemon is None:
             print("Replacement cancelled. Your deck was not changed.")
