@@ -56,7 +56,7 @@ while len(deck) < 6:
 
         if not already_in_deck:
             while confirm not in ["y", "n"]:
-                confirm = input("Add this Pokémon to your deck? (y/n): ")
+                confirm = input("Add this Pokémon to your deck? (y/n): ").lower()
                 if confirm.lower() == "y":
                     deck.append(chosen_pokemon)
                     print(deck)
